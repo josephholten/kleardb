@@ -1,0 +1,10 @@
+# personal files
+*.max
+*.jenny
+*.joseph
+
+# vscode
+.vscode
+
+# build directory
+build
