@@ -9,4 +9,4 @@
 # build directory
 build
 
-test_data
+profile/test_data

@@ -1,0 +1,1 @@
+openssl rand -out $1 -base64 $(( 2**30 * 3/4 ))
