@@ -8,10 +8,11 @@ set(SANITIZERS -fsanitize=address -fno-omit-frame-pointer)
 
 add_subdirectory(fmt)
 add_subdirectory(docopt.cpp)
+add_subdirectory(json)
+
+include_directories(.)
 
 add_executable(kleardb main.cpp)
 target_link_libraries(kleardb fmt::fmt)
 
-add_executable(profile profile.cpp)
-target_link_libraries(profile fmt::fmt docopt)
-target_compile_options(profile PRIVATE "${WARNINGS}" -O2)
+add_subdirectory(profile)
