@@ -5,6 +5,26 @@
 namespace kleardb {
 
 // serialize in big-endian
+size_t serialize_u16(uint16_t x, uint8_t* p_buf) {
+    p_buf[0] = (x >> 8) & 0xFF; //0x: we can use hexadecimal notation, 0xFF = 0b1111 1111 
+    p_buf[1] = (x >> 0) & 0xFF;
+
+    return 2;
+    // memcpy(&x, p_buf, sizeof(x)); // this does not work because of endianness
+}
+
+// deserialize in big endian
+size_t deserialize_u16(uint16_t* x, uint8_t* p_buf) {
+    *x = 0;
+    *x |= ((uint32_t)p_buf[2] <<  0);
+    *x |= ((uint32_t)p_buf[1] <<  8);
+
+    return 2;
+
+    // memcpy(&x, p_buf, sizeof(x)); // this does not work because of endianness
+}
+
+// serialize in big-endian
 size_t serialize_u32(uint32_t x, uint8_t* p_buf) {
     p_buf[0] = (x >> 24) & 0xFF; //0x: we can use hexadecimal notation, 0xFF = 0b1111 1111 
     p_buf[1] = (x >> 16) & 0xFF;

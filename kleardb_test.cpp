@@ -18,7 +18,21 @@ TEST(seralize_u32, basic) {
   fmt::println("big endian deserialized: {:d}", x);
 }
 
-TEST(seralize_u32, basic) {
+TEST(seralize_u64, basic) {
+  uint8_t buf[1024];
+
+  uint64_t x = 100;
+  uint8_t* p = (uint8_t*) &x;
+  fmt::println("memory: {:b} {:b} {:b} {:b} {:b} {:b} {:b} {:b}", p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7]);
+
+  kleardb::serialize_u64(x, buf);
+  fmt::println("big endian serialized: {:b} {:b} {:b} {:b} {:b} {:b} {:b} {:b}", buf[0], buf[1], buf[2], buf[3], buf[4], buf[5], buf[6], buf[7]);
+
+  uint64_t y;
+  kleardb::deserialize_u64(&y, buf);
+  fmt::println("big endian deserialized: {:d}", x);
+}
+
 
 TEST(seralize_str, basic) {
   // Expect two strings not to be equal.
