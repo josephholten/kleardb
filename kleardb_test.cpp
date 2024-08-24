@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include "kleardb/serialize.hpp"
+#include "fmt/core.h"
 
 // Demonstrate some basic assertions.
 TEST(seralize_u32, basic) {

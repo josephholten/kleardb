@@ -19,6 +19,6 @@ target_link_libraries(kleardb fmt::fmt)
 enable_testing()
 
 add_executable(kleardb_test kleardb_test.cpp)
-target_link_libraries(kleardb_test GTest::gtest_main)
+target_link_libraries(kleardb_test GTest::gtest_main fmt::fmt)
 include(GoogleTest)
 gtest_discover_tests(kleardb_test)
