@@ -88,7 +88,7 @@ size_t serialize(const std::string& s, uint8_t* p_buf) {
     uint64_t len_of_len = serialize(len, p_buf);
     p_buf += len_of_len;
 
-    for (int i = 0; i < len; i++) {
+    for (uint64_t i = 0; i < len; i++) {
         p_buf[i] = s[i];
     }
 
@@ -102,7 +102,7 @@ size_t deserialize(std::string& out, uint8_t* p_buf) {
 
     out.resize(len);
 
-    for (int i = 0; i < len; i++) {
+    for (uint64_t i = 0; i < len; i++) {
         out[i] = (char)p_buf[i];
     }
 

@@ -120,7 +120,7 @@ public:
 
     static Row Deserialize(Schema schema, uint8_t* ptr) {
         Row row;
-        for (int i = 0; i < schema.columns(); i++){
+        for (uint64_t i = 0; i < schema.columns(); i++){
             SchemaVariant var = SchemaVariantDefaultConstruct((size_t)schema.get_type(i));
 
             std::visit([&](auto&& x) { // within visit x = var but with the true type (`[&]` transfers outer variables by refference)

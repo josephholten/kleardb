@@ -10,4 +10,5 @@ int main() {
     std::string database_path = "basic.db";
 
     int db_fd = open(database_path.c_str(), O_CREAT | O_RDWR);
+    (void)db_fd;
 }
