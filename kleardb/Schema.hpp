@@ -99,12 +99,12 @@ public:
         Row row;
         // TODO: "factory method" should verify wether the entries in the object fit the schema and parse them to the correct types
         for (auto& [name, value] : object) {
-            if (value.index() != (size_t)schema.get_type(name)) { 
-                std::visit([&](auto&& el){
+            if (value.index() != (size_t)schema.get_type(name)) {
+                std::visit([&, name, value](auto&& el){ // name, value needed for clang compiler
                     throw std::invalid_argument(
                         fmt::format(
-                            "element '{}' of type '{}' does not match expected type '{}'", 
-                            el, 
+                            "element '{}' of type '{}' does not match expected type '{}'",
+                            el,
                             SchemaTypeNames[value.index()],
                             SchemaTypeNames[(size_t)schema.get_type(name)]
                         )
