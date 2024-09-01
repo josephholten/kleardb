@@ -100,7 +100,7 @@ public:
         // TODO: "factory method" should verify wether the entries in the object fit the schema and parse them to the correct types
         for (auto& [name, value] : object) {
             if (value.index() != (size_t)schema.get_type(name)) {
-                std::visit([&, name, value](auto&& el){ // name, value needed for clang compiler
+                std::visit([&, name, value](auto&& el){ // "name, value" needed for clang compiler
                     throw std::invalid_argument(
                         fmt::format(
                             "element '{}' of type '{}' does not match expected type '{}'",
@@ -118,29 +118,59 @@ public:
         return row;
     }
 
-    static Row Deserialize(Schema schema, uint8_t* ptr) {
-        Row row;
+    size_t deserialize(Schema schema, uint8_t* ptr) {
+        size_t total_offset = 0;
         for (uint64_t i = 0; i < schema.columns(); i++){
             SchemaVariant var = SchemaVariantDefaultConstruct((size_t)schema.get_type(i));
 
             std::visit([&](auto&& x) { // within visit x = var but with the true type (`[&]` transfers outer variables by refference)
-                size_t offset = deserialize(x, ptr);
+                size_t offset = kleardb::deserialize(x, ptr);
                 ptr += offset;
+                total_offset += offset;
             }, var);
 
-            row.m_data.push_back(var);
+            m_data.push_back(var);
         }
 
-        return row;
+        return total_offset;
     }
 
-    void Serialize(uint8_t* ptr) {
+    void print() {
+        for (const SchemaVariant& datapoint : m_data) {
+            std::visit([&](auto&& el){
+                fmt::print("{} ", el);
+            }, datapoint);
+        }
+        fmt::println("");
+    }
+
+    SchemaVariant& operator[](size_t idx) {
+        return m_data[idx];
+    }
+
+    SchemaVariant const& operator[](size_t idx) const {
+        return m_data[idx];
+    }
+
+    bool operator==(const Row& other) const {
+        if (m_data.size() != other.m_data.size())
+            return false;
+        for (size_t i = 0; i < m_data.size(); i++)
+            if (m_data[i] != other.m_data[i])
+                return false;
+        return true;
+    }
+
+    size_t serialize(uint8_t* ptr) {
+        size_t total_offset = 0;
         for (auto& element : m_data) {
             std::visit([&](auto&& el) { // within visit el = element but with the true type (`[&]` transfers outer variables by refference)
-                size_t offset = serialize(el, ptr);
+                size_t offset = kleardb::serialize(el, ptr);
                 ptr += offset;
+                total_offset += offset;
             }, element);
         }
+        return total_offset;
     }
 
 private:
