@@ -22,6 +22,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(googletest)
 
 add_subdirectory(fmt)
+#add_subdirectory(profile)
 
 add_executable(kleardb kleardb.cpp)
 target_link_libraries(kleardb fmt::fmt)
