@@ -4,7 +4,7 @@ from conan.tools.scm import Git
 
 import re
 
-class jlib(ConanFile):
+class kleardb(ConanFile):
     name = "kleardb"
 
     # Optional metadata
@@ -12,6 +12,8 @@ class jlib(ConanFile):
     description = "A SQL database implementation"
 
     requires = "fmt/[>=11]", "gtest/[>=1.15]"
+
+    settings = "os", "compiler", "build_type", "arch"
 
     def set_version(self):
         git = Git(self)
@@ -37,11 +39,11 @@ class jlib(ConanFile):
                     self.output.error(f"commit {descr} is after tag {tag} but has no '-pre' in current tag")
                     exit(1)
                 version = f"{tag}.{commits}+{h}"
-                self.output.highlight(f"version = {version}")
                 self.version = version
+        self.output.highlight(f"version = {self.version}")
 
-    #def layout(self):
-    #    cmake_layout(self)
+    def layout(self):
+        cmake_layout(self)
 
     def generate(self):
         deps = CMakeDeps(self)

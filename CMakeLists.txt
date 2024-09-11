@@ -17,7 +17,7 @@ set(RELEASE_FLAGS ${WARNING_FLAGS} ${PERFORMANCE_FLAGS})
 #add_subdirectory(fmt)
 #add_subdirectory(profile)
 find_package(fmt CONFIG REQUIRED)
-find_package(gtest CONFIG REQUIRED)
+find_package(GTest CONFIG REQUIRED)
 
 add_executable(kleardb kleardb.cpp)
 target_link_libraries(kleardb fmt::fmt)
