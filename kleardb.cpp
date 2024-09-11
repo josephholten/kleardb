@@ -28,7 +28,7 @@ void write_block(int fd, off_t offset, byte_t* block) {
         fmt::println("Error in write_block write: {}", strerror(errno));
         exit(1);
     }
-    if (count < BlockSize) {
+    if ((size_t)count < BlockSize) {
         // TODO: try again to write remaining bytes
         fmt::println("Error in write_block: could only write {}/{}", count, BlockSize);
         exit(1);
@@ -41,13 +41,13 @@ void read_block(int fd, size_t offset, byte_t* block) {
         fmt::println("Error in read_block lseek: {}", strerror(errno));
         exit(1);
     }
-    assert(pos == offset);
+    assert((size_t)pos == offset);
     ssize_t count = read(fd, block, BlockSize);
     if (count < 0) {
         fmt::println("Error in read_block read: {}", strerror(errno));
         exit(1);
     }
-    if (count < BlockSize) {
+    if ((size_t)count < BlockSize) {
         // TODO: try again to read remaining bytes
         fmt::println("Error in read_block: could only read {}/{}", count, BlockSize);
         exit(1);
