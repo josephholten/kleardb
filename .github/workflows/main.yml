@@ -13,7 +13,7 @@ jobs:
         with:
           submodules: true
       - name: Fetch tags
-        run: git fetch --prune --unshallow --tags
+        run: git fetch --tags
       - name: Install Conan
         id: conan
         uses: turtlebrowser/get-conan@main
@@ -22,7 +22,7 @@ jobs:
       - name: Install github-runner conan profile
         run: mkdir -p ~/.conan2/profiles/ && cp -f .github/conan_profile.txt ~/.conan2/profiles/default
       - name: Configure CMake
-        run: conan install .
+        run: git fetch --tags && conan install .
       - name: Build
         run: conan build -s build_type=Debug .
       - name: Test
