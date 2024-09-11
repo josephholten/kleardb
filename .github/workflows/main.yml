@@ -18,7 +18,7 @@ jobs:
       - name: Conan version
         run: echo "Conan version ${{ steps.conan.outputs.version }}"
       - name: Install github-runner conan profile
-        run: cp -f .github/conan_profile.txt /home/runner/.conan2/profiles/default
+        run: cp --parents -f .github/conan_profile.txt /home/runner/.conan2/profiles/default
       - name: Configure CMake
         run: conan install .
       - name: Build
