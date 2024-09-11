@@ -14,15 +14,10 @@ set(PERFORMANCE_FLAGS -Ofast -march=native -flto -fomit-frame-pointer)
 set(DEBUG_FLAGS ${WARNING_FLAGS} -O0)
 set(RELEASE_FLAGS ${WARNING_FLAGS} ${PERFORMANCE_FLAGS})
 
-include(FetchContent)
-FetchContent_Declare(
-  googletest
-  URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
-)
-FetchContent_MakeAvailable(googletest)
-
-add_subdirectory(fmt)
+#add_subdirectory(fmt)
 #add_subdirectory(profile)
+find_package(fmt CONFIG REQUIRED)
+find_package(gtest CONFIG REQUIRED)
 
 add_executable(kleardb kleardb.cpp)
 target_link_libraries(kleardb fmt::fmt)
