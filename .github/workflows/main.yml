@@ -19,6 +19,8 @@ jobs:
         run: echo "Conan version ${{ steps.conan.outputs.version }}"
       - name: Install github-runner conan profile
         run: mkdir -p ~/.conan2/profiles/ && cp -f .github/conan_profile.txt ~/.conan2/profiles/default
+      - name: Test presence of git tags
+        run: git status && git describe --tags
       - name: Configure CMake
         run: conan install .
       - name: Build
