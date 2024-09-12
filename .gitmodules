@@ -1,6 +1,0 @@
-[submodule "docopt.cpp"]
-	path = docopt.cpp
-	url = https://github.com/docopt/docopt.cpp
-[submodule "json"]
-	path = json
-	url = https://github.com/nlohmann/json.git
