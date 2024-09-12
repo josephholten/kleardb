@@ -17,6 +17,9 @@ jobs:
         with:
           fetch-tags: true
           fetch-depth: 0
+      - name: Configure safe directory for git
+        run: git config --global --add safe.directory /__w/${{ github.repository }}
+
       - name: Verify all tags are fetched
         run: |
           git config --global --add safe.directory /__w/kleardb/kleardb
