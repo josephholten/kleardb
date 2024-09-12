@@ -22,9 +22,8 @@ jobs:
 
       - name: Verify all tags are fetched
         run: |
-          git config --global --add safe.directory /__w/kleardb/kleardb
           git tag
-          git show-ref --tags
+        #git show-ref --tags
       - name: Install and configure Dependencies
         run: conan install . --profile=.github/conan.profile
       - name: Build
