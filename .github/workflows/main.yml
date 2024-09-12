@@ -17,9 +17,13 @@ jobs:
         with:
           fetch-tags: true
           fetch-depth: 0
+      - name: Verify all tags are fetched
+        run: |
+          git tag
+          git show-refs --tags
       - name: Install and configure Dependencies
-        run: conan install .
+        run: conan install . --profile=.github/conan.profile
       - name: Build
-        run: conan build .
+        run: conan build . --profile=.github/conan.profile
       - name: Test
         run: ./build/Debug/kleardb_test
