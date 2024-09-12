@@ -21,7 +21,7 @@ jobs:
       - name: Verify all tags are fetched
         run: |
           git config --global --add safe.directory /__w/kleardb/kleardb
-          git tag
+          git fetch --tags
           git describe --tags
         #git show-ref --tags
       - name: Install and configure Dependencies
