@@ -18,10 +18,8 @@ class kleardb(ConanFile):
     def set_version(self):
         git = Git(self)
 
-        diff = git.run("status --short")
-        if diff != "":
+        if git.is_dirty():
             self.output.warning("working tree is not clean")
-            #exit(1)
 
         descr = git.run("describe --tags")
         regex = r"^(\d+\.\d+\.\d+(?:-pre)?)(?:-(\d+)-((?:\d|\w)+))?$"
