@@ -9,7 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: conanio/gcc11
-      options: --user root
 
     steps:
       - name: Checkout
