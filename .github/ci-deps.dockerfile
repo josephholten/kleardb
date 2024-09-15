@@ -20,3 +20,5 @@ COPY .github/conan.profile /github/home/.conan2/profiles/default
 COPY conanfile.py /app/deps/conanfile.py
 
 RUN conan install --version='0.0.1' --build=missing /app/deps/conanfile.py
+
+RUN git config --global --add safe.directory /__w/kleardb/kleardb
