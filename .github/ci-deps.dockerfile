@@ -16,6 +16,7 @@ python3-pip
 RUN pip install conan
 
 COPY .github/conan.profile /root/.conan2/profiles/default
+COPY .github/conan.profile /github/home/.conan2/profiles/default
 COPY conanfile.py /app/deps/conanfile.py
 
 RUN conan install --version='0.0.1' --build=missing /app/deps/conanfile.py
