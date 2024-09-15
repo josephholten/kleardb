@@ -18,8 +18,8 @@ jobs:
           fetch-depth: 0
 
       - name: Install and configure Dependencies
-        run: conan install .
+        run: conan install . --profile=./.github/conan.profile
       - name: Build
-        run: conan build .
+        run: conan build . --profile=./.github/conan.profile
       - name: Test
         run: ./build/Debug/kleardb_test
