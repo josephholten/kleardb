@@ -14,13 +14,11 @@ jobs:
         with:
           fetch-tags: true
           fetch-depth: 0
-      - name: Setup python
-        uses: actions/setup-python@v5
+      - name: Setup conan
+        uses: hanksu1996/setup-conan
         with:
-          python-version: '3.x'
-          cache: 'pip'
-      - name: Install conan
-        run: pip install -r requirements.txt
+          cache-dependencies: true
+          cache-tool: true
 
       - name: Install and configure Dependencies
         run: conan install . -pr:a .github/conan.profile --build=missing
