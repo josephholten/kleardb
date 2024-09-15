@@ -9,8 +9,11 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: josephholten/kleardb
+      options: --user root
 
     steps:
+      - name: Preserve $HOME set in the container
+        run: echo HOME=/root >> "$GITHUB_ENV"
       - name: Checkout
         uses: actions/checkout@v4
         with:
