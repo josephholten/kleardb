@@ -7,18 +7,22 @@ on:
 jobs:
   build-test:
     runs-on: ubuntu-latest
-    container:
-      image: josephholten/kleardb
-      options: --user root
 
     steps:
-      - name: Preserve $HOME set in the container
-        run: echo HOME=/root >> "$GITHUB_ENV"
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-tags: true
           fetch-depth: 0
+      - name: Setup python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+          cache: 'pip'
+      - name: Install conan
+        run: pip install -r requirements.txt
+      - name: Install conan profile
+        run: conan profile detect --force
 
       - name: Install and configure Dependencies
         run: conan install .
