@@ -15,7 +15,7 @@ jobs:
           fetch-tags: true
           fetch-depth: 0
       - name: Setup conan
-        uses: hanksu1996/setup-conan@v1
+        uses: hankhsu1996/setup-conan@v1
         with:
           cache-dependencies: true
           cache-tool: true
