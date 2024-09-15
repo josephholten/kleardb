@@ -72,8 +72,6 @@ int main() {
     write_block(db_fd, 0, block.data());
     read_block(db_fd, 0, block.data());
 
-    fmt::println("Hello World");
-
     // deserialize rows
     // output rows
 
