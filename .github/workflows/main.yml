@@ -24,5 +24,3 @@ jobs:
         run: conan install . -pr:a .github/conan.profile --build=missing
       - name: Build
         run: conan build . -pr:a .github/conan.profile
-      - name: Test
-        run: ./build/Release/kleardb_test

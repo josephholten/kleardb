@@ -14,6 +14,8 @@ class kleardb(ConanFile):
     requires = "fmt/[>=11]", "gtest/[>=1.15]"
 
     settings = "os", "compiler", "build_type", "arch"
+    options = {"run_tests": [True, False]}
+    default_options = {"run_tests": True}
 
     def set_version(self):
         git = Git(self)
@@ -57,3 +59,5 @@ class kleardb(ConanFile):
         cmake.configure()
         cmake.build()
 
+        if self.options.run_tests:
+            cmake.test()
