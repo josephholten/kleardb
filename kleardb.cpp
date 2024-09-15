@@ -59,7 +59,11 @@ int main() {
 
     std::array<byte_t, BlockSize> block = {0};
 
-    int db_fd = open(database_path.c_str(), O_CREAT | O_RDWR);
+    // create file if it doesn't exist and open with read/write access
+    int flags = O_CREAT | O_RDWR;
+    // read write for user, read for group
+    int mode = S_IRUSR | S_IWUSR | S_IRGRP;
+    int db_fd = open(database_path.c_str(), flags, mode);
 
     // parse schema
     // parse some rows
