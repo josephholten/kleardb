@@ -20,7 +20,7 @@ jobs:
           fetch-tags: true
           fetch-depth: 0
       - name: Git Safe
-        run: git config --global --add safe.directory
+        run: git config --global --add safe.directory /__w/kleardb/kleardb
 
       - name: Install and configure Dependencies
         run: conan install .
