@@ -23,7 +23,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Install and configure Dependencies
-        run: conan install . -pr:a .github/conan.profile
+        run: conan install . -pr:a .github/conan.profile --build=missing
       - name: Build
         run: conan build . -pr:a .github/conan.profile
       - name: Test
