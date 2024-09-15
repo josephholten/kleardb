@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: josephholten/kleardb
-      options: --user root
+      #options: --user root
 
     steps:
       - name: Preserve $HOME set in the container
