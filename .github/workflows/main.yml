@@ -5,10 +5,10 @@ on:
     branches: ["master"]
 
 jobs:
-  build:
+  build-test:
     runs-on: ubuntu-latest
     container:
-      image: conanio/gcc11
+      image: josephholten/kleardb
 
     steps:
       - name: Checkout
@@ -18,8 +18,8 @@ jobs:
           fetch-depth: 0
 
       - name: Install and configure Dependencies
-        run: conan install . --profile=.github/conan.profile
+        run: conan install .
       - name: Build
-        run: conan build . --profile=.github/conan.profile
+        run: conan build .
       - name: Test
         run: ./build/Debug/kleardb_test

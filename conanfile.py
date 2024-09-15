@@ -17,6 +17,8 @@ class kleardb(ConanFile):
 
     def set_version(self):
         git = Git(self)
+        if self.version:
+            return
 
         if git.is_dirty():
             self.output.warning("working tree is not clean")
