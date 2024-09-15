@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: josephholten/kleardb
-      #options: --user root
+      options: --user root
 
     steps:
       - name: Preserve $HOME set in the container
@@ -19,6 +19,8 @@ jobs:
         with:
           fetch-tags: true
           fetch-depth: 0
+      - name: Git Safe
+        run: git config --global --add safe.directory
 
       - name: Install and configure Dependencies
         run: conan install .
