@@ -6,4 +6,4 @@ compiler.cppstd=17
 compiler.libcxx=libstdc++11
 compiler.version=11
 os=Linux
-build_type=Debug
+build_type=Release
