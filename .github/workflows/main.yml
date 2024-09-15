@@ -22,7 +22,9 @@ jobs:
       - name: Install conan
         run: pip install -r requirements.txt
       - name: Install conan profile
-        run: cp .github/conan.profile ~/.conan2/profiles/default
+        run: |
+          mkdir -p ~/.conan2/profiles
+          cp .github/conan.profile ~/.conan2/profiles/default
 
       - name: Install and configure Dependencies
         run: conan install .
